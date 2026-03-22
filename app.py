@@ -1,17 +1,27 @@
-# ⚠️ Código propositalmente vulnerável (para demonstração DevSecOps)
-
 import os
+from flask import Flask, request, jsonify
+from dotenv import load_dotenv
 
-# Hardcoded secret (erro de segurança)
-password = "admin123"
+load_dotenv()
 
-def login(user_input):
-    # Simulação insegura (sem validação)
-    if user_input == password:
-        print("Login sucesso")
+app = Flask(__name__)
+
+APP_PASSWORD = os.getenv("APP_PASSWORD")
+
+@app.route("/")
+def home():
+    return "Enterprise DevSecOps Security App Running"
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    if not data or "password" not in data:
+        return jsonify({"error": "Invalid request"}), 400
+
+    if data["password"] == APP_PASSWORD:
+        return jsonify({"status": "success"}), 200
     else:
-        print("Falha")
+        return jsonify({"status": "denied"}), 401
 
-# Execução
-user = input("Digite a senha: ")
-login(user)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
