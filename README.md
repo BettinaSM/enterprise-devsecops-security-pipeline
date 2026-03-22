@@ -1,32 +1,20 @@
 # 🔐 Enterprise DevSecOps Security Pipeline
 
-An automated DevSecOps security pipeline built with GitHub Actions, focused on vulnerability detection, secret scanning, and secure code analysis.
+![GitHub Actions](https://img.shields.io/badge/Security-Pipeline-red?style=for-the-badge\&logo=githubactions)
+
+Enterprise-grade DevSecOps pipeline built with GitHub Actions, designed to enforce security controls through automated scanning and fail-fast mechanisms.
 
 ---
 
-## 🚀 Objective
+## 🚀 Overview
 
-This project demonstrates how to integrate **DevSecOps practices** into a CI/CD pipeline, ensuring that security checks are automatically enforced during the development lifecycle.
+This project demonstrates how to integrate **security into the CI/CD pipeline** using a real-world DevSecOps approach.
 
----
+It implements automated checks to detect:
 
-![Security Pipeline](https://github.com/BettinaSM/enterprise-devsecops-security-pipeline/actions/workflows/security.yml/badge.svg)
-
-## 📌 Overview
-This project demonstrates a DevSecOps pipeline integrating automated security scanning into CI/CD workflows.
-
-It simulates a real enterprise scenario where security validation is enforced before deployment.
-
----
-
-## 🧠 Technologies & Tools
-
-* GitHub Actions (CI/CD)
-* Trivy (vulnerability scanner)
-* Gitleaks (secret detection)
-* Semgrep (SAST - static code analysis)
-* Python (intentionally vulnerable sample app)
-* Docker (ready for container scanning)
+* Vulnerabilities in dependencies
+* Hardcoded secrets
+* Insecure coding patterns
 
 ---
 
@@ -37,27 +25,34 @@ Developer Push → GitHub Actions →
     ├── Secret Scan (Gitleaks)
     ├── SAST (Semgrep)
     ├── Vulnerability Scan (Trivy)
-    └── Security Gate (FAIL on high risk)
+    └── Security Gate (FAIL on HIGH/CRITICAL)
 ```
 
 ---
 
-## ⚠️ Pipeline Behavior
+## ⚠️ Pipeline Behavior (Important)
 
 > ⚠️ This pipeline is intentionally designed to FAIL.
 
-This repository contains intentionally vulnerable code to demonstrate:
+This repository includes intentionally vulnerable code to simulate a **real enterprise security scenario**.
 
-* Automated vulnerability detection
-* Security enforcement in CI/CD
-* DevSecOps best practices in action
+When HIGH or CRITICAL issues are detected:
 
-If **HIGH or CRITICAL vulnerabilities** are detected:
+* ❌ Pipeline fails
+* 🔒 Code is blocked
 
-❌ The pipeline fails automatically
-✅ Unsafe code is blocked
+This demonstrates **security enforcement, not misconfiguration**.
 
-👉 This simulates a real-world enterprise security gate.
+---
+
+## 🧠 Technologies
+
+* GitHub Actions
+* Trivy
+* Gitleaks
+* Semgrep
+* Python
+* Docker
 
 ---
 
@@ -65,9 +60,7 @@ If **HIGH or CRITICAL vulnerabilities** are detected:
 
 ```text
 .
-├── .github/
-│   └── workflows/
-│       └── security.yml
+├── .github/workflows/security.yml
 ├── app.py
 ├── requirements.txt
 ├── Dockerfile
@@ -77,90 +70,87 @@ If **HIGH or CRITICAL vulnerabilities** are detected:
 
 ---
 
-## 🔍 Tooling Breakdown
+## 🔍 Security Layers
 
-### 🔐 Gitleaks
+### 🔐 Secret Detection
 
-Detects potential credential leaks (API keys, tokens, passwords)
+Gitleaks scans for exposed credentials such as API keys and tokens.
 
-### 🧠 Semgrep
+### 🧠 Static Analysis (SAST)
 
-Performs static code analysis to identify insecure patterns
+Semgrep detects insecure coding patterns.
 
-### 🐳 Trivy
+### 🐳 Dependency & Image Scanning
 
-Scans dependencies and container images for known vulnerabilities
+Trivy identifies known vulnerabilities in dependencies and containers.
 
 ---
 
-## 🧪 Simulated Vulnerabilities
+## 🧪 Simulated Risks
 
-This project includes intentionally insecure elements such as:
+This project intentionally includes:
 
-* Hardcoded secrets
+* Hardcoded credentials
 * Vulnerable dependencies
-* Insecure coding patterns
+* Insecure application logic
 
 ---
 
-## 🛠️ How It Works
+## 🛠️ Execution Flow
 
-1. A commit is pushed
-2. GitHub Actions triggers automatically
-3. Security scanners execute
-4. If critical issues are found:
+1. Developer pushes code
+2. GitHub Actions triggers pipeline
+3. Security tools execute
+4. Security gate evaluates results
 
-❌ Pipeline fails
-✅ Security is enforced
+If risk is detected:
+
+→ ❌ Pipeline fails
+→ 🔒 Deployment is blocked
 
 ---
 
 ## 🔒 Secrets Management
 
-* `.env` files are NOT committed
-* Sensitive data is stored using GitHub Secrets
-* `.env.example` provides a safe template
+* `.env` is excluded via `.gitignore`
+* Secrets stored in GitHub Actions Secrets
+* `.env.example` provided as template
 
 ---
 
 ## 📊 Future Improvements
 
+* Security dashboard
 * SIEM integration
-* Vulnerability dashboards
-* Automated notifications (Slack / Email)
-* Secure deployment pipeline after approval
+* Notification system (Slack / Email)
+* Policy-as-Code (OPA / Conftest)
 
 ---
 
-## 💡 Real-World Impact
-This pipeline demonstrates how organizations can:
+## 🏷️ Topics
 
-- Prevent insecure code from reaching production
-- Reduce risk of credential exposure
-- Enforce security policies automatically
+devsecops, github-actions, security, cicd, trivy, gitleaks, semgrep, cloud-security, automation
 
-----
+---
 
 ## 👩‍💻 Author
 
 Bettina Santana de Meirelles
 Unix/Linux Infrastructure | DevOps | Security | Cloud
 
-🔗 GitHub: https://github.com/BettinaSM
+🔗 https://github.com/BettinaSM
 
 ---
 
-## ⭐ Project Highlights
+## ⭐ Key Takeaways
 
-This project goes beyond a simple pipeline by demonstrating:
-
-✔ DevSecOps culture
-✔ Security as Code
-✔ Real security enforcement
-✔ Enterprise-grade pipeline behavior
+✔ Security integrated into CI/CD
+✔ Automated vulnerability detection
+✔ Real enforcement (fail-fast strategy)
+✔ Production-like DevSecOps pipeline
 
 ---
 
-## 📌 Conclusion
+## 📌 Final Note
 
-This repository simulates a real-world scenario where security is embedded into the development process, ensuring safer and more reliable software delivery.
+This project reflects how modern organizations adopt DevSecOps by embedding security into every stage of the development lifecycle.
