@@ -1,17 +1,22 @@
-# DevSecOps Security Pipeline
+# 🔐 DevSecOps Vulnerability Scanner Pipeline
 
-## Overview
-Pipeline automatizado de segurança com múltiplos scanners.
+## 📌 Overview
+Este projeto demonstra um pipeline DevSecOps com análise automatizada de vulnerabilidades em código, dependências e configurações.
 
-## Tools
+## 🚀 Tecnologias utilizadas
+- GitHub Actions
+- Gitleaks (detecção de secrets)
 - Semgrep (SAST)
-- Trivy (containers + deps)
-- Gitleaks (secrets)
+- Trivy (vulnerabilidades e containers)
 
-## Features
-✔ Detecta vulnerabilidades automaticamente  
-✔ Bloqueia builds inseguros  
-✔ Scan de código + container  
+## 🔍 O que o pipeline faz
+✔ Detecta secrets expostos  
+✔ Analisa código inseguro  
+✔ Identifica dependências vulneráveis  
+✔ Executa scans automatizados em CI/CD  
 
-## Real Scenario
-Simula ambiente enterprise com validação de segurança em CI/CD
+## ⚠️ Observação
+Este repositório contém vulnerabilidades **intencionais** para fins educacionais e demonstração.
+
+## 💡 Cenário real
+Simula um ambiente enterprise onde pipelines bloqueiam código inseguro antes do deploy.
