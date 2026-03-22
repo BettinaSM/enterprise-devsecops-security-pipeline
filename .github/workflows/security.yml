@@ -22,3 +22,12 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
+
+      # 🔥 AQUI entra o upgrade
+      - name: Build Docker Image
+        run: docker build -t test-app .
+
+      - name: Scan Docker Image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'test-app'
