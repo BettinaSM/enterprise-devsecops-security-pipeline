@@ -1,22 +1,40 @@
-# 🔐 DevSecOps Vulnerability Scanner Pipeline
+# 🔐 Enterprise DevSecOps Security Pipeline
+
+![Security Pipeline](https://github.com/BettinaSM/enterprise-devsecops-security-pipeline/actions/workflows/security.yml/badge.svg)
 
 ## 📌 Overview
-Este projeto demonstra um pipeline DevSecOps com análise automatizada de vulnerabilidades em código, dependências e configurações.
+This project demonstrates a DevSecOps pipeline integrating automated security scanning into CI/CD workflows.
 
-## 🚀 Tecnologias utilizadas
+It simulates a real enterprise scenario where security validation is enforced before deployment.
+
+## 🚀 Key Features
+- 🔍 Static Application Security Testing (SAST)
+- 🔐 Secrets detection
+- 📦 Dependency vulnerability scanning
+- 🐳 Container image scanning
+- 🚫 Security gate enforcement (pipeline fails on critical issues)
+
+## 🛠️ Tools Used
 - GitHub Actions
-- Gitleaks (detecção de secrets)
+- Gitleaks (Secrets detection)
 - Semgrep (SAST)
-- Trivy (vulnerabilidades e containers)
+- Trivy (Vulnerability & container scanning)
 
-## 🔍 O que o pipeline faz
-✔ Detecta secrets expostos  
-✔ Analisa código inseguro  
-✔ Identifica dependências vulneráveis  
-✔ Executa scans automatizados em CI/CD  
+## 🔍 Example Findings
+- Hardcoded credentials detected
+- Vulnerable dependencies identified
+- Insecure coding patterns flagged
 
-## ⚠️ Observação
-Este repositório contém vulnerabilidades **intencionais** para fins educacionais e demonstração.
+## ⚠️ Security Approach
+Sensitive data is NOT stored in the repository.
 
-## 💡 Cenário real
-Simula um ambiente enterprise onde pipelines bloqueiam código inseguro antes do deploy.
+Secrets are securely managed using GitHub Secrets.
+
+## 💡 Real-World Impact
+This pipeline demonstrates how organizations can:
+
+- Prevent insecure code from reaching production
+- Reduce risk of credential exposure
+- Enforce security policies automatically
+
+## 📂 Project Structure
