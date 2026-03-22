@@ -1,40 +1,43 @@
-name: DevSecOps Security Pipeline
+name: DevSecOps Security Scan
 
 on:
   push:
-    branches: ["main"]
-  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
 
 jobs:
   security:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Run Gitleaks (Secrets Scan)
-        uses: gitleaks/gitleaks-action@v2
+      # 🔐 Secrets scan
+      - name: Detect exposed secrets (Gitleaks)
+        uses: zricethezav/gitleaks-action@v2
 
-      - name: Run Semgrep (SAST)
+      # 🔍 SAST
+      - name: Static code analysis (Semgrep)
         uses: returntocorp/semgrep-action@v1
 
-      - name: Run Safety (Dependencies Scan)
-        run: |
-          pip install safety
-          safety check -r requirements.txt
-
-      - name: Run Trivy FS Scan
-        uses: aquasecurity/trivy-action@0.20.0
+      # 📦 Dependency scan
+      - name: Scan filesystem vulnerabilities (Trivy)
+        uses: aquasecurity/trivy-action@master
         with:
-          scan-type: fs
-          severity: CRITICAL,HIGH
+          scan-type: 'fs'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
 
+      # 🐳 Container
       - name: Build Docker image
-        run: docker build -t devsecops-app .
+        run: docker build -t test-app .
 
-      - name: Run Trivy Image Scan
-        uses: aquasecurity/trivy-action@0.20.0
+      - name: Scan container image (Trivy)
+        uses: aquasecurity/trivy-action@master
         with:
-          image-ref: devsecops-app
-          severity: CRITICAL,HIGH
+          image-ref: 'test-app'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
