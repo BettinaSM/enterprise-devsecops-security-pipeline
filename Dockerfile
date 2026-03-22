@@ -1,9 +1,16 @@
-FROM python:3.8-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
+RUN adduser --disabled-password appuser
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-RUN pip install -r requirements.txt
+USER appuser
 
-CMD ["python", "app.py"]
+EXPOSE 5000
+
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
